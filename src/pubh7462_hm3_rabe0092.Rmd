@@ -16,6 +16,7 @@ library(gt)
 library(paletteer)
 library(ggridges)
 library(DataExplorer)
+webshot::install_phantomjs()
 
 #Working directory for .RMD
 knitr::opts_knit$set(echo = TRUE,
@@ -115,15 +116,18 @@ values_to = "Value"
   fmt_number(
      columns = Value,
      decimals = 1) %>% 
-  as_raw_html() #so html source code doesn't display
+
+#Save gt
+#Create a figures directory and save the gt as a .png in there
+gtsave("./figures/gt_sumstats.png") #save it
 ```
 
-
+![](./figures/gt_sumstats.png)
 
 ## Problem 3.2 Create a plot of number of orders per aisle
 
 
-```{r, fig.height = 14}
+```{r, fig.height = 16}
 instacart.df %>% 
   mutate(
    aisle = str_to_title(aisle)
@@ -270,5 +274,8 @@ instacart.df %>%
     colors = scales::col_numeric(
       palette = c("white", my_purple),
       domain  = c(0, 2252))) %>% 
-  as_raw_html() #so html source code doesn't display
+
+#Save gt
+#Create a figures directory and save the gt as a .png in there
+gtsave("./figures/gt_aisleitems.png") #save it
 ```
