@@ -216,7 +216,10 @@ instacart.df %>%
   summarise(
     n_items = n()
   ) %>%
-  arrange(aisle, product_name, .desc = n_items) %>%
+  mutate(
+    product_name = fct_reorder(product_name, n_items, .desc = TRUE)
+  ) %>% 
+  arrange(aisle, product_name, .desc = n_items) %>% 
   slice(1:5) %>%
   rename(
     Product = product_name,
@@ -228,7 +231,7 @@ instacart.df %>%
     columns = "No. Items",
     colors = scales::col_numeric(
       palette = c("white", my_purple),
-      domain  = c(0, 2252))) %>% 
+      domain  = c(0, 18726))) %>% 
 
 #Save gt
 #Create a figures directory and save the gt as a .png in there
